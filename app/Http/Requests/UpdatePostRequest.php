@@ -31,6 +31,7 @@ class UpdatePostRequest extends FormRequest
                 Rule::unique('posts', 'title')->ignore($this->post)
             ],
             'content' => 'nullable|string',
+            'content' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id'
         ];
     }
