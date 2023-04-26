@@ -9,28 +9,46 @@
             
     </div>
         <h1 class="display-5 fw-bold mb-5">
-          Crea il tuo progetto!
+          Richiedi un preventivo!
         </h1>
 
-        <form method="POST" action="/projects">
+        
 
-                {{ csrf_field() }}
-                <div class="m-3">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="name" required>
+
+        <form>
+         {{ csrf_field() }}
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Il tuo indirizzo email:</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Chi sei:</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                    <option>CEO</option>
+                    <option>Freelance</option>
+                    <option>Azienda</option>
+                    <option>Libero professionista</option>
+                    <option>PMI</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">Ci contatti per:</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                    <option>Siti web</option>
+                    <option>SEO</option>
+                    <option>SEM</option>
+                    <option>Tools</option>
+                    <option>Proposte commerciali</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Maggiori informazioni...</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
 
-                <div class="m-3">
-                    <label for="client">Client:</label>
-                    <input type="text" id="client" name="client" required>
-                </div>
+                <button type="button" class="btn btn-info text-light pt-3 pb-3 fs-5 mt-3"> Invio!</button>
 
-                <div class="m-3">
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description" required></textarea>
-                </div>
 
-                <button type="submit" class="btn btn-primary m-4">Create Project</button>
         </form>
 
 
