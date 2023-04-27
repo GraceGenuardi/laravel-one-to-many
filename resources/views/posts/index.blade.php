@@ -33,9 +33,9 @@
             <th>ID</th>
             <th>Title</th>
             <th>Categoria</th>
-            <th>Data creazione</th>
-            <th>Data modifica</th>
             <th>Tag</th>
+            <th>Data modifica</th>
+            <th>Data creazione</th>
             <th>Eliminato</th>
             <th></th>
           </tr>
@@ -48,6 +48,17 @@
                   <a href="{{ route('posts.show',$post) }}">{{ $post->title }}</a>
                 </td>
                 <td> {{ $post->category ? $post->category->name : '-' }} </td>
+
+               <!-- TAG -->
+               <td>
+                  {{-- @dump($post->ta) --}}
+                  @forelse($post->tags()->orderBy('name','asc')->get() as $tag )
+                    <span class="badge rounded-pill text-bg-light">{{ $tag->name }}</span>
+                  @empty
+                    -
+                  @endforelse
+                </td>
+
                 <td>{{ $post->created_at->format('d/m/Y') }}</td>
                 <td>{{ $post->updated_at->format('d/m/Y') }}</td>
                 <td>
@@ -72,7 +83,7 @@
               </tr>
           @empty
             <tr>
-              <th colspan="6">Nessun post trovato</th>
+              <th colspan="7">Nessun post trovato</th>
             </tr>
           @endforelse
         </tbody>
