@@ -56,10 +56,15 @@ class PostController extends Controller
     {
 
         $data = $request->validated();
+        // dd($data);
 
         $data['slug'] = Str::slug($data['title']);
 
         $post = Post::create($data);
+
+        if (isset($data['tags'])) {
+            $post->tags()->attach($data['tags']);
+        }
 
         return to_route('posts.show', $post);
     }
@@ -84,8 +89,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::orderBy('name', 'asc')->get();
+        $tags = Tag::orderBy('name', 'asc')->get();
 
-        return view('posts.edit', compact('post', 'categories'));
+        return view('posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -98,12 +104,20 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         $data = $request->validated();
+        // dd($data);
 
         if ($data['title'] !== $post->title) {
             $data['slug'] = Str::slug($data['title']);
         }
 
         $post->update($data);
+
+        if (isset($data['tags'])) {
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->sync([]);
+        }
+
 
         return to_route('posts.show', $post);
     }
@@ -129,6 +143,9 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         if ($post->trashed()) {
+
+            // $post->tags()->detach();
+
             $post->forceDelete(); // eliminazione def
         } else {
             $post->delete(); //eliminazione soft
