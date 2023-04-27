@@ -35,6 +35,7 @@
             <th>Categoria</th>
             <th>Data creazione</th>
             <th>Data modifica</th>
+            <th>Tag</th>
             <th>Eliminato</th>
             <th></th>
           </tr>
@@ -54,7 +55,7 @@
                 </td>
                 <td>
                   <div class="d-flex ">
-                    <a class="btn btn-sm btn-secondary" href="{{ route('posts.edit',$post) }}">Edit</a>
+                    <a class="btn btn-sm bg-primary text-light mx-3" href="{{ route('posts.edit',$post) }}">Edit</a>
                     <form action="{{ route('posts.destroy',$post) }}" method="POST">
                       @csrf
                       @method('DELETE')
@@ -63,7 +64,7 @@
                     @if($post->trashed())
                     <form action="{{ route('posts.restore',$post) }}" method="POST">
                       @csrf
-                      <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
+                      <input class="btn btn-sm btn-success mx-3" type="submit" value="Ripristina">
                     </form>
                     @endif
                   </div>
