@@ -42,8 +42,7 @@ class PostController extends Controller
     {
         $categories = Category::orderBy('name', 'asc')->get();
         $tags = Tag::orderBy('name', 'asc')->get();
-        // dd ($tags);
-        
+
         return view('posts.create', compact('categories', 'tags'));
     }
 
@@ -63,7 +62,7 @@ class PostController extends Controller
 
         $post = Post::create($data);
 
-        if (isset($data['tags'])) {
+        if ( isset($data['tags'])) {
             $post->tags()->attach($data['tags']);
         }
 
